@@ -11,12 +11,12 @@
 
     <!-- Style -->
     <style>
-    .language { 
+    .language {
         position: fixed;
         bottom: 5px;
         right: 5px;
         padding: 5px;
-        background-color:grey; 
+        background-color:grey;
     }
 
     </style>
@@ -24,14 +24,16 @@
 
     <!-- Code -->
     <script type='text/javascript'>//<![CDATA[
-    var languages = ["zh", "en"];
-    var language_names = ["中文", "English"];
-    var fallback_language = "zh";
 
-    window.onload = function() {
+    window.addEventListener('load', function(){
         document.body.appendChild(
-            language_widget(languages, language_names));
-    };
+            language_widget({
+                languages: ["zh", "en"],
+                language_names: ["中文", "English"],
+                fallback_language: 'zh'
+            })
+        );
+    });
 
     //]]>
     </script>
