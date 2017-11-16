@@ -114,7 +114,8 @@
 
     itemHTML += '<div>\
                   <h1>' + response.title + '</h1>\
-                  <div>' + response.body + '</div>\
+                  <div>' + response.body + '</div><br>\
+                  <span>' + response.owner + '</span><br><br>\
                 </div>';
 
     itemContent.innerHTML = itemHTML;
@@ -123,6 +124,24 @@
     itemContent.querySelector('.topics__back').addEventListener('click', function(){
       itemContent.style.display = 'none';
       container.querySelector('.topics__content').style.display = 'block';
+    });
+
+    makeRequest({
+      url: 'https://test.wfx.io/api/v1/comments/',
+      method: 'GET',
+      callback: function(response){
+        if (response.results.length) {
+          var comments = document.createElement('div');
+          var commentsHTML = '<h3>Comments</h3>';
+          response.results.forEach(function(comment){
+            commentsHTML += '<div>' + comment.text + '<div style="text-align:right">' + comment.owner + '</div></div><br><br>';
+          });
+
+          comments.innerHTML = commentsHTML;
+
+          itemContent.appendChild(comments);
+        }
+      }
     });
   }
 
