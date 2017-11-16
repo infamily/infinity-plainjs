@@ -8,6 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="./style.css">
     <script type="text/javascript" src="./code.js"></script>
+    <script type="text/javascript" src="./topics.js"></script>
 
     <!-- Style -->
     <style>
@@ -33,6 +34,8 @@
                 fallback_language: 'zh'
             })
         );
+
+        topicsAPI(document.querySelector('.topics'));
     });
 
     //]]>
@@ -59,7 +62,18 @@
     <span class="zh">我们觉得我们应该让大家理解我们用的技术。你来这里学习！<br><br><font color="grey">清进行。（快开）</font></span>
 </p>
 
-
+    <article class="topics">
+        <div class="topics__content">
+            <h1 class="topics__title en">Topics</h1>
+            <h1 class="topics__title zh">Topics in Chineese</h1>
+            <form class="topics__search">
+              <input type="search" class="topics__search-input">
+              <button class="en">Search</button>
+              <button class="zh">Search in Chineese</button>
+            </form>
+            <div class="topics__list"></div>
+        </div>
+    </article>
 </div>
 
 </body>
