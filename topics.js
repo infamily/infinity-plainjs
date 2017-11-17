@@ -29,7 +29,7 @@
 
     response.results.forEach(function(item){
       topicsHTML += '<section class="topics__item">\
-                <a href="#" class="topics__item-title" data-id="' + item.id + '"><h2>' + item.title + '</h2></a>\
+                <a href="#/topic/' + item.id + '" class="topics__item-title" data-id="' + item.id + '"><h2>' + item.title + '</h2></a>\
             </section>';
     });
 
@@ -39,6 +39,8 @@
         event.preventDefault();
 
         localStorage.setItem('scrollY', window.scrollY);
+
+        window.history.pushState({}, null, this.hash);
 
         makeRequest({
           url: 'https://test.wfx.io/api/v1/topics/' + this.dataset.id + '/',
@@ -63,33 +65,35 @@
     pagination.innerHTML = '';
 
     if (response.previous) {
-      var fakeLink = document.createElement('a');
-      fakeLink.href = response.previous;
+      var fakeLinkPrev = document.createElement('a');
+      fakeLinkPrev.href = response.previous;
 
       var prevButton = document.createElement('button');
       prevButton.textContent = 'Previous page';
       prevButton.addEventListener('click', function(){
         makeRequest({
-          url: 'https://' + fakeLink.host + fakeLink.pathname + fakeLink.search,
+          url: 'https://' + fakeLinkPrev.host + fakeLinkPrev.pathname + fakeLinkPrev.search,
           method: 'GET',
           callback: showTopics
         });
+        window.scrollTo(0, 0);
       });
       pagination.appendChild(prevButton);
     }
 
     if (response.next) {
-      var fakeLink = document.createElement('a');
-      fakeLink.href = response.next;
+      var fakeLinkNext = document.createElement('a');
+      fakeLinkNext.href = response.next;
 
       var nextButton = document.createElement('button');
       nextButton.textContent = 'Next page';
       nextButton.addEventListener('click', function(){
         makeRequest({
-          url: 'https://' + fakeLink.host + fakeLink.pathname + fakeLink.search,
+          url: 'https://' + fakeLinkNext.host + fakeLinkNext.pathname + fakeLinkNext.search,
           method: 'GET',
           callback: showTopics
         });
+        window.scrollTo(0, 0);
       });
       pagination.appendChild(nextButton);
     }
@@ -102,7 +106,7 @@
 
     var itemHTML = '';
 
-    itemHTML += '<a href="#" class="topics__back">&larr; go back</a>';
+    itemHTML += '<a href="/" class="topics__back">&larr; go back</a>';
 
     var itemContent = container.querySelector('.topics__content-item');
 
@@ -128,6 +132,7 @@
       itemContent.style.display = 'none';
       container.querySelector('.topics__content').style.display = 'block';
       window.scrollTo(0, parseInt(localStorage.getItem('scrollY')) || 0);
+      window.history.pushState({}, null, this.pathname);
     });
 
     makeRequest({
@@ -155,11 +160,22 @@
     var search = container.querySelector('.topics__search');
     search.addEventListener('submit', makeSearch);
 
+    var topicHref = window.location.hash.substr(1);
+    if (topicHref) {
+      makeRequest({
+        url: 'https://test.wfx.io/api/v1/topics/' + topicHref.match(/\/topic\/(\d+)/)[1] + '/',
+        method: 'GET',
+        callback: showTopicItem
+      });
+    }
+
     makeRequest({
       url: 'https://test.wfx.io/api/v1/topics/',
       method: 'GET',
       callback: showTopics
     });
+
+    localStorage.removeItem('scrollY');
   }
 
   window.topicsAPI = topicsAPI;
