@@ -38,6 +38,8 @@
       link.addEventListener('click', function(event){
         event.preventDefault();
 
+        localStorage.setItem('scrollY', window.scrollY);
+
         makeRequest({
           url: 'https://test.wfx.io/api/v1/topics/' + this.dataset.id + '/',
           method: 'GET',
@@ -96,6 +98,7 @@
   // topic page
   function showTopicItem(response) {
     container.querySelector('.topics__content').style.display = 'none';
+    window.scrollTo(0, 0);
 
     var itemHTML = '';
 
@@ -124,6 +127,7 @@
       event.preventDefault();
       itemContent.style.display = 'none';
       container.querySelector('.topics__content').style.display = 'block';
+      window.scrollTo(0, parseInt(localStorage.getItem('scrollY')) || 0);
     });
 
     makeRequest({
