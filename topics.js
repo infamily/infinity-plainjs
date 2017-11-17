@@ -29,7 +29,7 @@
 
     response.results.forEach(function(item){
       topicsHTML += '<section class="topics__item">\
-                <a href="#" class="topics__item-title" data-url="' + item.url + '"><h2>' + item.title + '</h2></a>\
+                <a href="#" class="topics__item-title" data-id="' + item.id + '"><h2>' + item.title + '</h2></a>\
             </section>';
     });
 
@@ -38,11 +38,8 @@
       link.addEventListener('click', function(event){
         event.preventDefault();
 
-        var fakeLink = document.createElement('a');
-        fakeLink.href = this.dataset.url;
-
         makeRequest({
-          url: 'https://' + fakeLink.host + fakeLink.pathname + fakeLink.search,
+          url: 'https://test.wfx.io/api/v1/topics/' + this.dataset.id + '/',
           method: 'GET',
           callback: showTopicItem
         });
@@ -112,29 +109,32 @@
       container.appendChild(itemContent);
     }
 
+    var mdConverter = new showdown.Converter();
+
     itemHTML += '<div>\
                   <h1>' + response.title + '</h1>\
-                  <div>' + response.body + '</div><br>\
+                  <div>' + mdConverter.makeHtml(response.body) + '</div><br>\
                   <span>' + response.owner + '</span><br><br>\
                 </div>';
 
     itemContent.innerHTML = itemHTML;
     itemContent.style.display = 'block';
 
-    itemContent.querySelector('.topics__back').addEventListener('click', function(){
+    itemContent.querySelector('.topics__back').addEventListener('click', function(event){
+      event.preventDefault();
       itemContent.style.display = 'none';
       container.querySelector('.topics__content').style.display = 'block';
     });
 
     makeRequest({
-      url: 'https://test.wfx.io/api/v1/comments/',
+      url: 'https://test.wfx.io/api/v1/comments/?topic=' + response.id,
       method: 'GET',
       callback: function(response){
         if (response.results.length) {
           var comments = document.createElement('div');
           var commentsHTML = '<h3>Comments</h3>';
           response.results.forEach(function(comment){
-            commentsHTML += '<div>' + comment.text + '<div style="text-align:right">' + comment.owner + '</div></div><br><br>';
+            commentsHTML += '<div>' + mdConverter.makeHtml(comment.text) + '<div style="text-align:right">' + comment.owner + '</div></div><br><br>';
           });
 
           comments.innerHTML = commentsHTML;
