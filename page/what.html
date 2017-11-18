@@ -11,30 +11,44 @@
 
     <!-- Style -->
     <style>
-    .language { 
+    .language {
         position: fixed;
         bottom: 5px;
         right: 5px;
         padding: 5px;
-        background-color:grey; 
+        background-color:grey;
     }
+
     </style>
     <!-- /Style -->
 
     <!-- Code -->
     <script type='text/javascript'>//<![CDATA[
-    var languages = ["lt", "zh", "ru", "en"];
-    var language_names = ["Lietuvių", "中文", "Русский", "English"];
-    var fallback_language = "en";
 
-    window.onload = function() {
+
+
+    window.addEventListener('load', function(){
         document.body.appendChild(
-            language_widget(languages, language_names));
-    };
+            language_widget({
+                languages: ["lt", "zh", "ru", "en"],
+                language_names: ["Lietuvių", "中文", "Русский", "English"],
+                fallback_language: 'en'
+            })
+        );
+    });
+
+    window.addEventListener('load', function(){
+        document.body.appendChild(
+            menu_widget()
+        );
+    });
 
     //]]>
     </script>
     <!-- /Code -->
+
+
+
 
 </head>
 

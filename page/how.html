@@ -6,10 +6,8 @@
     <title>Plain Text</title>
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" href="./style.css">
-    <script type="text/javascript" src="./vendor/showdown.min.js"></script>
-    <script type="text/javascript" src="./code.js"></script>
-    <script type="text/javascript" src="./topics.js"></script>
+    <link rel="stylesheet" type="text/css" href="../style.css">
+    <script type="text/javascript" src="../code.js"></script>
 
     <!-- Style -->
     <style>
@@ -27,6 +25,8 @@
     <!-- Code -->
     <script type='text/javascript'>//<![CDATA[
 
+
+
     window.addEventListener('load', function(){
         document.body.appendChild(
             language_widget({
@@ -35,8 +35,6 @@
                 fallback_language: 'zh'
             })
         );
-
-        topicsAPI(document.querySelector('.topics'));
     });
 
     window.addEventListener('load', function(){
@@ -53,21 +51,19 @@
 
 <body>
 
+
 <div class="main">
-    <article class="topics">
-        <div class="topics__content">
-            <h2 class="topics__title en">Infinity Family</h2>
-            <h2 class="topics__title zh">无界家庭</h2>
-            <form class="topics__search">
-              <input type="search" class="topics__search-input">
-              <button class="en">Search</button>
-              <button class="zh">Search in Chineese</button>
-            </form>
-            <div class="topics__list"></div>
-        </div>
-    </article>
+
+    <h1 class="en">How does this place work?</h1>
+    <h1 class="zh">这个地方如何操作？</h1>
+
+    <p>
+        <span class="en">We believe, that technologies that we use, should be made understandable to people. You came here to learn. <br><br><font color="grey">Proceed.(will be soon)</font></span>
+        <span class="zh">我们觉得我们应该让大家理解我们用的技术。你来这里学习！<br><br><font color="grey">清进行。（快开）</font></span>
+    </p>
+
 </div>
+
 
 </body>
 </html>
-

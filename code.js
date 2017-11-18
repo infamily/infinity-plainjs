@@ -63,13 +63,49 @@
             localStorage["lang"] = set_language(this.value);
         });
 
-    //  // Append it.
-    //  window.onload = function() {
-    //    document.body.appendChild(LanguagesDiv);
-    //  };
-
         return languagesDiv;
     }
 
     window.language_widget = language_widget;
+
+    function menu_widget() {
+        choices = ["Home", "About", "How"];
+        choice_names = ["/", "/page/what.html", "/page/how.html"];
+
+        // Add <div class="language">
+        var menuDiv = document.createElement("div");
+        menuDiv.setAttribute("class", "menu");
+
+        // Add <select>
+        var menuSelect = document.createElement("select");
+        menuSelect.id = "items";
+        menuDiv.appendChild(menuSelect);
+
+        // Add <option,..>
+        for (var i = 0; i < choices.length; i++) {
+            var option = document.createElement("option");
+            option.text = choices[i];
+            option.value = choice_names[i];
+            if (option.value == window.location.pathname) {
+                option.selected = true;
+            }
+            menuSelect.appendChild(option);
+        }
+
+        menuSelect.addEventListener('change', function(){
+
+            var url = document.getElementById('items').value;
+            console.log(url);
+
+            window.location.replace(url);
+
+        });
+
+        return menuDiv;
+
+    }
+
+    window.menu_widget = menu_widget;
+
+
 }());
