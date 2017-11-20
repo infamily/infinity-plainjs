@@ -2,6 +2,8 @@
     var browser_language = navigator.language || navigator.userLanguage;
     var default_language = browser_language.substr(0, 2).toLowerCase();
     var languages;
+    // people are more familiar with '.cn' as domain, and language //
+    if (default_language == 'zh') { default_language = 'cn'; };
 
     function set_state (language, state) {
         var styleEl = document.createElement('style');
@@ -61,6 +63,7 @@
 
         languageSelect.addEventListener('change', function(){
             localStorage["lang"] = set_language(this.value);
+            window.location.reload(false);
         });
 
         return languagesDiv;
@@ -69,7 +72,7 @@
     window.language_widget = language_widget;
 
     function menu_widget() {
-        choices = ["Home", "About", "How"];
+        choices = ["Home", "What?", "How?"];
         choice_names = ["/", "/page/what.html", "/page/how.html"];
 
         // Add <div class="language">

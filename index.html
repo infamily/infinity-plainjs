@@ -30,9 +30,9 @@
     window.addEventListener('load', function(){
         document.body.appendChild(
             language_widget({
-                languages: ["zh", "en"],
-                language_names: ["中文", "English"],
-                fallback_language: 'zh'
+                languages: ["cn", "en", "ru", "lt"],
+                language_names: ["中文", "English", "Русский", "Lietuvių"],
+                fallback_language: 'cn'
             })
         );
 
@@ -56,12 +56,13 @@
 <div class="main">
     <article class="topics">
         <div class="topics__content">
-            <h1 class="topics__title en">Infinity Family</h1>
-            <h1 class="topics__title zh">无界家庭</h1>
+            <h1 class="topics__title">Infinity Family</h1>
             <form class="topics__search">
               <input type="search" class="topics__search-input">
               <button class="en">Search</button>
-              <button class="zh">Search in Chineese</button>
+              <button class="cn">搜索</button>
+              <button class="lt">Paieška</button>
+              <button class="ru">Поиск</button>
             </form>
             <div class="topics__list"></div>
         </div>
