@@ -22,14 +22,24 @@
     });
   }
 
+  var topicTYPES = {
+    0: "need-title",
+    1: "goal-title",
+    2: "idea-title",
+    3: "plan-title",
+    4: "step-title",
+    5: "task-title"
+  }
+
   // list of topics
   function showTopics(response) {
     var topicsList = container.querySelector('.topics__list');
     var topicsHTML = '';
 
+
     response.results.forEach(function(item){
       topicsHTML += '<section class="topics__item">\
-                <a href="#/topic/' + item.id + '" class="topics__item-title" data-id="' + item.id + '"><h2>' + item.title + '</h2></a>\
+                <a href="#/topic/' + item.id + '" class="topics__item-title ' + topicTYPES[item.type] + '" data-id="' + item.id + '"><h2>' + item.title + '</h2></a>\
             </section>';
     });
 
@@ -119,7 +129,7 @@
     var mdConverter = new showdown.Converter();
 
     itemHTML += '<div>\
-                  <h1>' + response.title + '</h1>\
+                  <h1 class="'+ topicTYPES[response.type] +'">' + response.title + '</h1>\
                   <div>' + mdConverter.makeHtml(response.body) + '</div><br>\
                   <span>' + response.owner + '</span><br><br>\
                 </div>';

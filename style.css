@@ -34,3 +34,27 @@ select {
     padding: 5px;
     background-color:grey;
 }
+
+.need-title {
+    color: #9400D3;
+}
+
+.goal-title {
+    color: #0000FF;
+}
+
+.idea-title {
+    color: #FF7F00;
+}
+
+.plan-title {
+    color:#FF0000;
+} 
+
+.step-title {
+    color:#CCCC00;
+}
+
+.task-title {
+    color:#008000;
+}
