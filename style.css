@@ -36,25 +36,25 @@ select {
 }
 
 .need-title {
-    color: #9400D3;
+    /* color: #9400D3; */
 }
 
 .goal-title {
-    color: #0000FF;
+    /* color: #0000FF; */
 }
 
 .idea-title {
-    color: #FF7F00;
+    /* color: #FF7F00; */
 }
 
 .plan-title {
-    color:#FF0000;
+    /* color:#FF0000; */
 } 
 
 .step-title {
-    color:#CCCC00;
+    /* color:#CCCC00; */
 }
 
 .task-title {
-    color:#008000;
+    /* color:#008000; */
 }
