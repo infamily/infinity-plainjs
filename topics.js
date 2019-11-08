@@ -16,7 +16,7 @@
     event.preventDefault();
 
     makeRequest({
-      url: 'https://test.wefindx.io/topics/?search=' + this.querySelector('.topics__search-input').value + '&lang=' + localStorage['lang'],
+      url: 'https://api.infty.xyz/topics/?search=' + this.querySelector('.topics__search-input').value + '&lang=' + localStorage['lang'],
       method: 'GET',
       callback: showTopics
     });
@@ -53,7 +53,7 @@
         window.history.pushState({}, null, this.hash);
 
         makeRequest({
-          url: 'https://test.wefindx.io/topics/' + this.dataset.id + '/' + '?lang=' + localStorage['lang'],
+          url: 'https://api.infty.xyz/topics/' + this.dataset.id + '/' + '?lang=' + localStorage['lang'],
           method: 'GET',
           callback: showTopicItem
         });
@@ -146,7 +146,7 @@
     });
 
     makeRequest({
-      url: 'https://test.wefindx.io/comments/?topic=' + response.id + '&lang=' + localStorage['lang'],
+      url: 'https://api.infty.xyz/comments/?topic=' + response.id + '&lang=' + localStorage['lang'],
       method: 'GET',
       callback: function(response){
         if (response.results.length) {
@@ -173,14 +173,14 @@
     var topicHref = window.location.hash.substr(1);
     if (topicHref) {
       makeRequest({
-        url: 'https://test.wefindx.io/topics/' + topicHref.match(/\/topic\/(\d+)/)[1] + '/' + '?lang=' + localStorage['lang'],
+        url: 'https://api.infty.xyz/topics/' + topicHref.match(/\/topic\/(\d+)/)[1] + '/' + '?lang=' + localStorage['lang'],
         method: 'GET',
         callback: showTopicItem
       });
     }
 
     makeRequest({
-      url: 'https://test.wefindx.io/topics/?lang=' + localStorage['lang'],
+      url: 'https://api.infty.xyz/topics/?lang=' + localStorage['lang'],
       method: 'GET',
       callback: showTopics
     });
